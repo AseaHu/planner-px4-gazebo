@@ -1,1 +1,1 @@
-# planner-px4-gazebo
+# fast-planner
