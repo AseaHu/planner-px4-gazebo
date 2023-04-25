@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<sdf version='1.5'>
+  <model name='iris_fpv_cam'>
+
+    <include>
+      <uri>model://iris</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://kinect_self</uri>
+      <pose>0.1 0 0 0 0 0</pose>
+    </include>
+    <joint name="kinect_self_joint" type="fixed">
+      <child>kinect_self::kinect_link</child>
+      <parent>iris::base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <upper>0</upper>
+          <lower>0</lower>
+        </limit>
+      </axis>
+    </joint>
+    
+
+  </model>
+</sdf>
+

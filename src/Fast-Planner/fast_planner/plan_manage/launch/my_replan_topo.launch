@@ -1,0 +1,52 @@
+<launch>
+  <!-- global parameters -->
+  <arg name="map_size_x" value="40.0"/>
+  <arg name="map_size_y" value="20.0"/>
+  <arg name="map_size_z" value=" 3.2"/>
+
+  <arg name="odom_topic" value="/vehicle_pose" />
+
+  
+
+  <!-- main algorithm params -->
+  <include file="$(find plan_manage)/launch/topo_algorithm.xml">
+    <!-- size of map -->
+    <arg name="map_size_x_" value="$(arg map_size_x)"/>
+    <arg name="map_size_y_" value="$(arg map_size_y)"/>
+    <arg name="map_size_z_" value="$(arg map_size_z)"/>
+    <arg name="odometry_topic" value="$(arg odom_topic)"/>
+
+    <!-- camera pose: transform of camera frame in the world frame -->
+    <!-- depth topic: depth image, 640x480 by default -->
+    <!-- don't set cloud_topic if you already set these ones! -->
+    <arg name="camera_pose_topic" value="/camera_pose"/>
+    <arg name="depth_topic" value="/kinect/depth_image"/>
+
+    <!-- topic of point cloud measurement, such as from LIDAR  -->
+    <!-- don't set camera pose and depth, if you already set this one! -->
+    <arg name="cloud_topic" value="/pcl_render_node/cloud"/>
+
+    <!-- intrinsic params of the depth camera -->
+    <arg name="cx" value="320.0"/>
+    <arg name="cy" value="240.0"/>
+    <arg name="fx" value="381.36114963014774"/>
+    <arg name="fy" value="381.36114963014774"/>
+
+    <!-- maximum velocity and acceleration the drone will reach -->
+    <arg name="max_vel" value="1" />
+    <arg name="max_acc" value="1" />
+  </include>
+
+  <!-- trajectory server -->
+  <node pkg="plan_manage" name="traj_server" type="traj_server" output="screen">
+    <remap from="/position_cmd" to="planning/pos_cmd"/>
+
+    <remap from="/odom_world" to="$(arg odom_topic)"/>
+    <param name="traj_server/time_forward" value="1.5" type="double"/>
+  </node>
+
+  <!-- interface -->  
+  <node pkg="interface" name="navigator" type="navigator"/>
+  <node pkg="interface" name="controller" type="controller" output="screen"/>
+
+</launch>

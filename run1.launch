@@ -1,0 +1,4 @@
+<launch>
+	<include file="$(find plan_manage)/launch/rviz.launch"/>
+	<include file="$(find plan_manage)/launch/my_replan_kino.launch"/>
+</launch>

@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.5">
+  <model name="kinect_self">
+    <pose>0 0 0 0 0 0</pose>
+    <link name="kinect_link">
+      <inertial>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>4.16666666667e-06</ixx>
+          <iyy>5.20833333333e-07</iyy>
+          <izz>3.85416666667e-06</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+	  <!--mesh filename="/home/asea/PX4-Autopilot/Tools/sitl_gazebo/models/kinect_self/stereo_cam.STL"/> -->
+          <box>
+            <size>0.00023000 0.00076000 0.00032000</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.00023000 0.00076000 0.00032000</size>
+          </box>
+        </geometry>
+      </visual>
+      <sensor type="depth" name="kinect">
+      <always_on>true</always_on>
+      <update_rate>30.0</update_rate>
+      <camera>
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <format>B8G8R8</format>
+          <width>640</width>
+          <height>480</height>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100.0</far>
+        </clip>
+      </camera>
+      <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.2</baseline>
+        <alwaysOn>true</alwaysOn>
+        <!-- Keep this zero, update_rate in the parent <sensor> tag
+          will control the frame rate. -->
+        <updateRate>0.0</updateRate>
+        <cameraName>kinect_ir</cameraName>
+        <imageTopicName>/kinect/color/image_raw</imageTopicName>
+        <depthImageTopicName>/kinect/depth_image</depthImageTopicName>
+        <pointCloudTopicName>/kinect/depth/points</pointCloudTopicName>
+        <frameName>support_depth</frameName>
+        <pointCloudCutoff>0.5</pointCloudCutoff>
+        <pointCloudCutoffMax>100.0</pointCloudCutoffMax>
+        <distortionK1>0</distortionK1>
+        <distortionK2>0</distortionK2>
+        <distortionK3>0</distortionK3>
+        <distortionT1>0</distortionT1>
+        <distortionT2>0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0</Cx>
+        <Cy>0</Cy>
+        <focalLength>0</focalLength>
+        <hackBaseline>0</hackBaseline>
+      </plugin>
+    </sensor>
+      <gravity>0</gravity>
+    </link>
+  </model>
+  
+</sdf>
+
