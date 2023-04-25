@@ -7,4 +7,4 @@
 
 + 运行planner及接口节点：`$ source devel/setup.bash && roslaunch run1.launch （或 $ source devel/setup.bash && roslaunch run2.launch）` 
 
-+ 当第二个终端显示“Vehicle armed”之后，可以使用rviz的“2D NAV Gaol”工具点击地图界面设置目标点
++ 当第二个终端提示“Vehicle armed”之后，可以使用rviz的“2D NAV Gaol”工具点击地图界面设置目标点
