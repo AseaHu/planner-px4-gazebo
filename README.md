@@ -1,4 +1,4 @@
-### planner-px4-gazebo
+## planner-px4-gazebo
 ### 1. 将本仓库中PX4-Autopilot文件夹中的文件复制到计算机本地的对应文件夹
 ### 2. 编译planner_interface
 ### 3. 运行
