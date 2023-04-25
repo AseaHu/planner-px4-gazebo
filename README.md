@@ -3,7 +3,9 @@
 ### 2. 编译planner_interface
 ### 3. 运行
 
-- 运行px4：`$ roslaunch px4 plan_test.launch`
+- 运行px4：```
+$ roslaunch px4 plan_test.launch
+```
 
 - 运行planner及接口节点：`$ source devel/setup.bash && roslaunch run1.launch （或 $ source devel/setup.bash && roslaunch run2.launch）` 
 
